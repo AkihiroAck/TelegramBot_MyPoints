@@ -1,0 +1,77 @@
+# TelegramBot_MyPoints
+
+**TelegramBot_MyPoints** — это телеграм-бот, который подключается к **Google Sheets** и позволяет пользователям просматривать свои баллы.  
+Данные хранятся в таблице, а бот показывает только баллы владельцу номера телефона (чужие данные не доступны).  
+
+---
+
+## Функционал
+- Пользователь делится своим номером телефона через кнопку в боте
+- Бот проверяет, что это номер самого пользователя
+- По номеру телефона ищется строка в Google Sheets
+- Пользователь получает свои баллы
+- Если номер не найден или контакт чужой — бот сообщает об ошибке
+
+---
+
+## Установка и запуск
+
+### 1. Клонируйте репозиторий
+
+```bash
+git clone https://github.com/your-username/TelegramBot_MyPoints.git
+cd TelegramBot_MyPoints
+```
+
+### 2. Установите зависимости
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Настройте переменные окружения
+
+Создайте файл .env и добавьте в него:
+
+```bash
+TELEGRAM_API_KEY=your_telegram_api_key_here
+GOOGLE_SHEETS_KEY=credentials.json
+SPREADSHEET_ID=google_sheets_id
+SHEET_NAME=Sheet1
+```
+
+- TELEGRAM_API_KEY — Токен бота из @BotFather
+- GOOGLE_SHEETS_KEY — Путь к JSON-ключу сервисного аккаунта (Google Cloud Console → IAM & Admin → Service Accounts → Create Key). Нужно дать доступ к файлу.
+- SPREADSHEET_ID — ID вашей таблицы (Берётся из URL: https://docs.google.com/spreadsheets/d/THIS_IS_YOUR_ID/edit#gid=0)
+- SHEET_NAME — Название листа с данными (Например, Sheet1 или Лист1)
+
+Пример таблицы:
+
+| Телефон          | Баллы    |
+| ---------------- | -------- |
+| 7 777 777 77 77  | 554      |
+| 7 666 666 66 66  | 425      |
+| 7 555 555 55 55  | 214      |
+
+### 4. Запустите бота
+
+```bash
+python main.py
+```
+
+---
+
+## Использование
+
+- Пользователь пишет боту /start
+- Бот предлагает кнопку «Посмотреть баллы» и показывает доступные команды
+- При нажатии «Посмотреть баллы» бот запрашивает контакт
+- Если номер совпадает с номером пользователя и с номером из Google Sheets → показываются баллы
+
+## Технологии
+
+- Python 3.10+
+- aiogram
+- google-auth
+- gspread
+- python-dotenv
