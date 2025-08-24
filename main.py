@@ -9,9 +9,9 @@ import gspread
 
 load_dotenv()
 
-TELEGRAM_API_KEY = os.getenv('TELEGRAM_API_KEY')  # Ваш API ключ Telegram бота (Создать можно у @BotFather)
-GOOGLE_SHEETS_KEY = os.getenv('GOOGLE_SHEETS_KEY')  # Путь к JSON-ключу (Нужно создать в Google Cloud/API & Services/Service Accounts. Нужно дать доступ на чтение в Google Sheets)
-SPREADSHEET_ID = os.getenv('SPREADSHEET_ID')  # ID вашей таблицы Google Sheets (Можно найти в URL к таблице: https://docs.google.com/spreadsheets/d/THIS_IS_YOUR_ID/edit#gid=0)
+TELEGRAM_API_KEY = os.getenv('TELEGRAM_API_KEY')  # Токен Telegram бота
+GOOGLE_SHEETS_KEY = os.getenv('GOOGLE_SHEETS_KEY')  # Путь к вашему JSON файлу с ключом сервисного аккаунта Google
+SPREADSHEET_ID = os.getenv('SPREADSHEET_ID')  # ID вашей таблицы Google Sheets
 SHEET_NAME = os.getenv('SHEET_NAME')  # Название листа
 
 
