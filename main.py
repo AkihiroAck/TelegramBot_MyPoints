@@ -37,6 +37,7 @@ def setup_google_sheets():
 bot = Bot(token=TELEGRAM_API_KEY)
 dp = Dispatcher()
 
+
 # Основная клавиатура
 main_keyboard = ReplyKeyboardMarkup(
     keyboard=[
@@ -58,13 +59,40 @@ contact_keyboard = ReplyKeyboardMarkup(
 # Обработчик команды /start
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.answer("Привет! Добро пожаловать в наш бот!", reply_markup=main_keyboard)
+    text = (
+        "Привет! Добро пожаловать в наш бот!\n"
+        "\nДоступные команды:\n"
+        "/start - Начать работу с ботом\n"
+        "/score - Посмотреть ваши баллы\n"
+        "/help - Помощь по использованию бота"
+    )
+
+    await message.answer(text, reply_markup=main_keyboard)
 
 
-# Обработчик команды /info
-@dp.message(Command("info"))
+# Обработчик команды /score
+@dp.message(Command("score"))
 async def cmd_start(message: types.Message):
-    await message.answer("Для просмотра баллов нужно поделиться номером", reply_markup=contact_keyboard)
+    text = 'Для просмотра баллов нужно поделиться номером. \nНажмите кнопку внизу "Посмотреть баллы"'
+
+    await message.answer(text, reply_markup=contact_keyboard)
+
+
+# Обработчик команды /help
+@dp.message(Command("help"))
+async def cmd_start(message: types.Message):
+    help_text = (
+        "Этот бот позволяет вам проверить ваши баллы.\n"
+        "Для этого нажмите кнопку 'Посмотреть баллы' и поделитесь своим номером телефона.\n"
+        "Ваш номер будет использоваться только для поиска ваших баллов в базе данных (Если они есть).\n"
+        "Ваши данные не будут сохраняться или использоваться в других целях.\n"
+        "\nДоступные команды:\n"
+        "/start - Начать работу с ботом\n"
+        "/score - Посмотреть ваши баллы\n"
+        "/help - Помощь по использованию бота"
+    )
+
+    await message.answer(help_text, reply_markup=main_keyboard)
 
 
 # Обработчик полученного контакта
@@ -84,8 +112,7 @@ async def handle_contact_for_points(message: types.Message):
 # Функция получения данных о баллах
 async def get_points_data(phone_number: str) -> str:
     """
-    Ваша функция для получения данных о баллах по номеру телефона.
-    Сейчас возвращает заглушку.
+    Получение данных о баллах из Google Sheets по номеру телефона.
     """
 
     try:
