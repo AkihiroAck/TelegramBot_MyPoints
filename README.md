@@ -28,7 +28,7 @@
 ### 1. Клонируйте репозиторий
 
 ```bash
-git clone https://github.com/your-username/TelegramBot_MyPoints.git
+git clone https://github.com/AkihiroAck/TelegramBot_MyPoints.git
 cd TelegramBot_MyPoints
 ```
 
